@@ -52,9 +52,9 @@ M
 
 */
 
-import { StringCalculator } from "../stringCalculator";
+import { StringCalculator } from '../stringCalculator';
 
-describe("String calculator", () => {
+describe('StringCalculator', () => {
   let stringCalc: StringCalculator;
   
   beforeEach(() => {
@@ -93,8 +93,18 @@ describe("String calculator", () => {
     
   })
   
+  describe('Dynamic Class Creation', () => {
+    it('should create an instance of the class defined by the environment variable', () => {
+      process.env.CLASS_NAME = 'stringCalculator';
+      const className = process.env.CLASS_NAME;
+      const instance = createInstance(className);
+      expect(instance).toBeInstanceOf(StringCalculator);
+    });
+  });
   
-  
-
+  function createInstance(className: string) {
+    const classModule = require(`../${className}`);
+    return new classModule.StringCalculator();
+  }
   
 });

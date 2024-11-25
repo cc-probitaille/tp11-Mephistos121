@@ -47,6 +47,11 @@ export class StringCalculator {
     return inputArray.map(Number);
   }
 
+  public createInstance(className: string) {
+    const clazz = require(`./${className}`).StringCalculator;
+    return new clazz();
+  }
+
   /**
    * Extrait le délimiteur personnalisé de la chaîne d'entrée.
    * @param input La chaîne d'entrée contenant le délimiteur personnalisé.
